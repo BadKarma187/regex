@@ -1,0 +1,9 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+n = input()
+for i in xrange(n):
+  PAN = raw_input()
+  alp = PAN[:5]+PAN[-1]
+  if(alp.isalpha() and alp.isupper() and PAN[5:-1].isdigit()):
+    print "YES"
+  else:
+    print "NO"
