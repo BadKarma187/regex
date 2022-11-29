@@ -1,0 +1,43 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import sys
+def check(ip):
+  if '.' in ip:
+    #ipv4
+    ip = ip.split('.')
+    if len(ip)!=4:
+      return False
+    for n in ip:
+      try:
+        n = int(n)
+      except:
+        return False
+      else:
+        if n > 255 or n < 0:
+          return False
+    return 4
+  elif ':' in ip:
+    #ipv4
+    ip = ip.split(':')
+    if len(ip)!=8:
+      return False
+    for n in ip:
+      for c in n:
+        if (c not in map(str, range(10)) and
+          c not in map(lambda x: chr(x),range(ord('a'), ord('f')+1))):
+          return False
+    return 6
+  else:
+    return False
+n = int(sys.stdin.readline())
+for _ in xrange(n):
+  val = sys.stdin.readline().strip()
+  res = check(val)
+  if res == False:
+    print "Neither"
+  elif res == 4:
+    print "IPv4"
+  elif res == 6:
+    print "IPv6"
+  else:
+    print "UFO"
+   
