@@ -1,0 +1,31 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+#!/usr/bin/python
+import re
+
+n = input()
+assert 1 <= n <= 10
+
+corpus=[]
+for i in range(n):
+  sentence = raw_input().strip()
+  split_sentence = sentence.split()
+
+  assert 1 <= len(split_sentence) <= 10
+
+  for word in split_sentence:
+    assert 1 <= (len(word)) <= 20
+    for char in word:
+      assert 97 <= ord(char) <= 122
+
+  corpus.append(sentence)
+
+corpus = " ".join( sentence for sentence in corpus)
+
+t = input()
+assert 1 <= t <= 9
+
+for i in range(t):
+  word = raw_input().strip()
+  assert word.index("our") != -1
+  word_split = word.split("our")
+  print len(re.findall("\\b" + word_split[0]+"ou?r"+word_split[1]+"\\b", corpus))
