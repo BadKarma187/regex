@@ -1,0 +1,6 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+n = input()
+for i in xrange(n):
+  line = raw_input()
+  if(line[:2].upper() == "HI" and line[2].isspace() and line[3].upper()!= "D"):
+    print line
