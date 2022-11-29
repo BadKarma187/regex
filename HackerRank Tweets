@@ -1,0 +1,12 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+from sets import Set
+import string
+import sys
+n = int(input())
+res = 0
+for i in range(n):
+  s = raw_input()
+  if(re.match(".*hackerrank.*",string.lower(s))):
+    res+=1
+print(res)
