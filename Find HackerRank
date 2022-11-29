@@ -1,0 +1,17 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+t=input()
+for _ in range(t):
+  s = raw_input()
+  o=re.search("^hackerrank", s)
+  o2=re.search("hackerrank$", s)
+  if o == None:
+    if o2 == None:
+      print -1
+    else:
+      print 2
+  else:
+    if o2 == None:
+      print 1
+    else:
+      print 0
