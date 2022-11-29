@@ -1,0 +1,10 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+n = input()
+words = []
+for i in xrange(n):
+  words += raw_input().strip().split()
+t = input()
+for i in xrange(t):
+  uk = raw_input()
+  us = uk[:-2]+"se"
+  print len(filter(lambda x: x == uk or x == us, words))
