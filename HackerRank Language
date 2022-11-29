@@ -1,0 +1,10 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import sys
+l = ["C","CPP","JAVA","PYTHON","PERL","PHP","RUBY","CSHARP","HASKELL","CLOJURE","BASH","SCALA","ERLANG","CLISP","LUA","BRAINFUCK","JAVASCRIPT","GO","D","OCAML","R","PASCAL","SBCL","DART","GROOVY","OBJECTIVEC"]
+n = int(input())
+for i in range(n):
+  [s1,s2]=raw_input().split()
+  if(s2 not in l):
+    sys.stdout.write('IN')
+  sys.stdout.write('VALID\n')
+sys.stdout.flush()
