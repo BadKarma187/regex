@@ -1,0 +1,15 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+n = int(raw_input())
+words = []
+regex = "[^a-zA-Z0-9_]*"
+for i in range(0, n):
+  words += re.split(" *", raw_input())
+t = int(raw_input())
+for i in range(0, t):
+  s = raw_input()
+  count = 0
+  for w in words:
+    for e in re.split(regex, w):
+      if e == s: count += 1
+  print count
