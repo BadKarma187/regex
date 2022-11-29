@@ -1,0 +1,17 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import fileinput
+
+stdin = [line.strip() for line in fileinput.input()]
+
+tokens = []
+for line in stdin:
+ tokens.extend(line.split())
+
+tokens = set(tokens)
+
+if 'class' in tokens and '{' in tokens:
+ print('Java')
+elif '{' in tokens:
+ print('C')
+else:
+ print('Python')
