@@ -1,0 +1,52 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import collections
+import re
+
+def get_input():
+  import sys
+  return sys.stdin.read()
+
+TEXT = get_input()
+
+Token = collections.namedtuple('Token', ['typ', 'value', 'line', 'column'])
+
+def get_comments(s):
+  # Tokenizing the text
+  token_specification = [
+    ('COMMENT_SINGLE_START', r'//'),
+    ('COMMENT_SINGLE_END', r"\n"),
+    ('COMMENT_MULTI_START', r'/\*'),
+    ('COMMENT_MULTI_END', r'\*/'),
+    ('QUOTE', r'"')
+  ]
+  # Single regex match...
+  tok_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_specification)
+
+  line = 1
+  pos = line_start = 0
+  in_single = in_multi = in_string = False
+  single_start = None
+  multi_start = None
+  string_start = None
+
+  for match in re.finditer(tok_regex, s):
+    typ = match.lastgroup
+    if not (in_multi or in_single) and typ == "QUOTE":
+      in_string = not in_string
+    elif not (in_multi or in_string) and not in_single and typ == "COMMENT_SINGLE_START":
+      in_single = True
+      single_start = match.start()
+    elif not (in_multi or in_string) and in_single and typ == "COMMENT_SINGLE_END":
+      in_single = False
+      yield s[single_start:match.start()]
+      single_start = None
+    elif not (in_single or in_string) and not in_multi and typ == "COMMENT_MULTI_START":
+      in_multi = True
+      multi_start = match.start()
+    elif not (in_single or in_string) and in_multi and typ == "COMMENT_MULTI_END":
+      in_multi = False
+      yield s[multi_start:match.end()]
+      multi_start = None
+
+for comment in get_comments(TEXT):
+  print (comment)
